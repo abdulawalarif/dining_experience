@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 textCapitalization: TextCapitalization.sentences,
                 onChanged: (value) {
                   _searchController.text.toLowerCase();
-                  searchedList.searchQuery(value);
+                  searchedList.searchQuery(value.toLowerCase());
                 },
                 decoration: const InputDecoration(
                     hintText: 'Search',
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             child: _searchController.text.isEmpty ||
                 (searchedList.Businesses?.businesses?.isEmpty??false)
                 ? Center(
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: _searchController.text.isNotEmpty
                     ? const Text(
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             )
-                : _showSearchResults(listOfBusiness: searchedList.Businesses?.businesses)),
+                : _showSearchResults(listOfBusiness: searchedList.Businesses?.businesses??[])),
       ),
     );
   }
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: listOfBusiness.length,
+        itemCount: listOfBusiness.length??0,
         itemBuilder: (context, index) {
           final item = listOfBusiness[index];
           return SingleItemOnSearch(oneBusiness: item,);

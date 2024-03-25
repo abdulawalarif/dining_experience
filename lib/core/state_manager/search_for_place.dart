@@ -18,7 +18,7 @@ class MysterySearchProvider with ChangeNotifier {
       headers: {
         'Content-Type': 'application/json',
         'Authorization':
-            'Bearer ZEWPfT_KRkkbacEGy4cV8RdiYiZgkudMf5ShUnHX6mT6hx2nHrCrIEnnQivmCZ1XfYvL8zwC5dtCWHHHxoOl_aqrPp6xdmUJPcDPjm62icjbq9O3dIXQg19ewu__ZXYx',
+            'Bearer lxkkH3UO3hNwjxvE02f7o0IFHQqlCNOQZy_Anny_avZAosEM-tdOynpe4LNVGU2v1inFjomNxZVc_0P3D0RAWzn1P3N6bm_pupy-ivRo7fxWzAJlbXyIxGDaqbMBZnYx',
         'X-Requested-With': 'XMLHttpRequest', // Or
       },
     );
@@ -26,6 +26,7 @@ class MysterySearchProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       _listOfBusinesses =   MysterySearchModel.fromJson(data);
+      notifyListeners();
     } else {
       _listOfBusinesses = null;
     }
