@@ -10,28 +10,42 @@ class SingleItemOnSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     double productImageSize = MediaQuery.of(context).size.width * 0.9;
 
-    return SizedBox(
-      height: productImageSize + 20,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-            oneBusiness.imageUrl ?? '',
-            height: productImageSize - 15,
-            width: double.infinity,
-            fit: BoxFit.fill,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Text(
-              oneBusiness.name ?? '',
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyText1,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: productImageSize + 20,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                oneBusiness.imageUrl ?? '',
+                height: productImageSize - 45,
+                width: double.infinity,
+                fit: BoxFit.fill,
+
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text(
+               'Name: ${ oneBusiness.name ?? ''}',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ), Padding(
+              padding: const EdgeInsets.only(top: .5),
+              child: Text(
+               'Category: ${ oneBusiness.categories?.first.title ?? ''}',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
