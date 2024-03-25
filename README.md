@@ -1,0 +1,1 @@
+1. Added an extra layer from herokuapp for accessing Cross-origin data from yelp.

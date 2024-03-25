@@ -1,13 +1,13 @@
 import 'dart:convert';
+import 'package:dining_experience/core/models/mystery_search_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../app_constants.dart';
 
 class MysterySearchProvider with ChangeNotifier {
 
-  List<dynamic> _listOfUsers = [];
+  MysterySearchModel? _listOfBusinesses;
 
-  List<dynamic> get listOfUsers => _listOfUsers;
+  MysterySearchModel? get Businesses => _listOfBusinesses;
 
   Future<void> searchQuery(String query) async {
     String searchUrl = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=$query&latitude=40.695817520300416&longitude=73.91814602552196';
@@ -22,13 +22,12 @@ class MysterySearchProvider with ChangeNotifier {
         'X-Requested-With': 'XMLHttpRequest', // Or
       },
     );
-    print(response.body);
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      _listOfUsers = (data as List).map((json) => json).toList();
+      _listOfBusinesses =   MysterySearchModel.fromJson(data);
     } else {
-      _listOfUsers = [];
+      _listOfBusinesses = null;
     }
 
     notifyListeners();
